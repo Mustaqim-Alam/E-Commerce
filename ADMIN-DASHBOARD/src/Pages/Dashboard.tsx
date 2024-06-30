@@ -3,6 +3,7 @@ import Sidebar from "../Components/Sidebar";
 import { BsSearch } from "react-icons/bs";
 import userImg from "../assets/dummy-user-img.png";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
+import rowData from "../assets/data.json"
 
 const Dashboard = () => {
   return (
@@ -24,26 +25,46 @@ const Dashboard = () => {
             color="rgb(0, 115, 255)"
           />
           <WidgetItem
-            percent={40}
-            value={340000}
-            heading="Revenue"
-            amount={true}
-            color="rgb(0, 115, 255)"
+            percent={-40}
+            value={340}
+            heading="Users"
+            color="rgb(0, 997, 5)"
           />
           <WidgetItem
-            percent={40}
-            value={340000}
-            heading="Revenue"
-            amount={true}
-            color="rgb(0, 115, 255)"
+            percent={80}
+            value={70000}
+            heading="Transactions"
+            color="rgb(720, 115, 255)"
           />
           <WidgetItem
-            percent={40}
-            value={340000}
-            heading="Revenue"
-            amount={true}
-            color="rgb(0, 115, 255)"
+            percent={30}
+            value={862}
+            heading="Products"
+            color="rgb(550, 115, 20)"
           />
+        </section>
+
+        <section className="graph-container">
+          <div className="revenue-chart">
+            <h2>Revenue & Transaction</h2>
+          </div>
+          <div className="stock-category">
+            {" "}
+            <h2> Inventory</h2>
+            <div>
+              {
+                rowData.categories.map((item, index)=>(
+                  <CategoryItem
+                  key={index}
+                  heading={item.heading}
+                  value={item.value}
+                  color={`hsl(${item.value}, ${item.value}%, 50%)`}
+                />
+                ))
+              }
+             
+            </div>
+          </div>
         </section>
       </main>
     </div>
@@ -63,7 +84,7 @@ const WidgetItem = ({
   value,
   percent,
   color,
-  amount,
+  amount = false,
 }: widgetItemProps) => (
   <article className=" widget">
     <div className="widgetInfo">
@@ -75,11 +96,41 @@ const WidgetItem = ({
         </span>
       ) : (
         <span className="red">
-          <HiTrendingDown /> + {percent}%{" "}
+          <HiTrendingDown /> {percent}%{" "}
         </span>
       )}
     </div>
+    <div
+      className="widgetCircle"
+      style={{
+        background: `conic-gradient( 
+          ${color} ${(Math.abs(percent) / 100) * 360}deg, rgb(255,255,255) 0 )`,
+      }}
+    >
+      <span style={{ color }}>{percent}%</span>
+    </div>
   </article>
+);
+
+interface categoryItemProps {
+  heading: string;
+  value: number;
+  color: string;
+}
+
+const CategoryItem = ({ heading, value, color }: categoryItemProps) => (
+  <div className="category-item">
+    <h5>{heading}</h5>
+    <div>
+      <div
+        style={{
+          backgroundColor: color,
+          width: `${value}%`,
+        }}
+      ></div>
+    </div>
+    <span>{value}%</span>
+  </div>
 );
 
 export default Dashboard;
