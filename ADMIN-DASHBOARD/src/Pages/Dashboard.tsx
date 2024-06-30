@@ -3,7 +3,8 @@ import Sidebar from "../Components/Sidebar";
 import { BsSearch } from "react-icons/bs";
 import userImg from "../assets/dummy-user-img.png";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
-import rowData from "../assets/data.json"
+import rowData from "../assets/data.json";
+import { Barchart } from "../Components/Charts";
 
 const Dashboard = () => {
   return (
@@ -47,22 +48,27 @@ const Dashboard = () => {
         <section className="graph-container">
           <div className="revenue-chart">
             <h2>Revenue & Transaction</h2>
+            <Barchart
+              data_1={[457, 362, 800, 121, 700, 100, 984]}
+              data_2={[57, 992, 20, 499, 300, 900, 794]}
+              title_1="Revenue"
+              title_2="Transaction"
+              bgColor_1="rgb(22, 66, 91)"
+              bgColor_2="rgb(175, 252, 65)"
+            />
           </div>
           <div className="stock-category">
             {" "}
             <h2> Inventory</h2>
             <div>
-              {
-                rowData.categories.map((item, index)=>(
-                  <CategoryItem
+              {rowData.categories.map((item, index) => (
+                <CategoryItem
                   key={index}
                   heading={item.heading}
                   value={item.value}
                   color={`hsl(${item.value}, ${item.value}%, 50%)`}
                 />
-                ))
-              }
-             
+              ))}
             </div>
           </div>
         </section>
