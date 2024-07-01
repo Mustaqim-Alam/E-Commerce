@@ -5,6 +5,7 @@ import userImg from "../assets/dummy-user-img.png";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import rowData from "../assets/data.json";
 import { Barchart } from "../Components/Charts";
+import { BiMaleFemale } from "react-icons/bi";
 
 const Dashboard = () => {
   return (
@@ -66,10 +67,22 @@ const Dashboard = () => {
                   key={index}
                   heading={item.heading}
                   value={item.value}
-                  color={`hsl(${item.value}, ${item.value}%, 50%)`}
+                  color={`hsl(${item.value}, ${item.value * 9}%, 45%)`}
                 />
               ))}
             </div>
+          </div>
+        </section>
+        <section className=" transaction-container">
+          <div className="gender-chart">
+            <h2>Gender Ratio</h2>
+            <p>
+              {" "}
+              <BiMaleFemale />{" "}
+            </p>
+          </div>
+          <div>
+
           </div>
         </section>
       </main>
@@ -105,7 +118,7 @@ const WidgetItem = ({
           <HiTrendingDown /> {percent}%{" "}
         </span>
       )}
-    </div>
+    </div>{" "}
     <div
       className="widgetCircle"
       style={{
@@ -138,5 +151,7 @@ const CategoryItem = ({ heading, value, color }: categoryItemProps) => (
     <span>{value}%</span>
   </div>
 );
+
+
 
 export default Dashboard;

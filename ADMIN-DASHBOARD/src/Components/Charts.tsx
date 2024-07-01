@@ -9,7 +9,7 @@ import {
   ChartData,
   ChartOptions,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -48,7 +48,7 @@ export const Barchart = ({
     indexAxis: horizontal ? "y" : "x",
     plugins: {
       legend: {
-        display: true,
+        display: false,
       },
       title: {
         display: false,
@@ -57,7 +57,7 @@ export const Barchart = ({
     },
     scales: {
       y: {
-        begainAtZero: true,
+        beginAtZero: true,
         grid: {
           display: false,
         },
@@ -77,14 +77,56 @@ export const Barchart = ({
         label: title_1,
         data: data_1,
         backgroundColor: bgColor_1,
+        // barThickness: flex,
+        barPercentage: 1,
+        categoryPercentage: 0.4,
       },
       {
         label: title_2,
         data: data_2,
         backgroundColor: bgColor_2,
+        // barThickness: flex,
+        barPercentage: 1,
+        categoryPercentage: 0.4,
       },
     ],
   };
 
   return <Bar options={options} data={data} />;
+};
+
+interface DoughChartProps {
+  labels: string[];
+  data: number[];
+  backgroundColor: string[];
+  cutout?: number | string;
+  legends?: boolean;
+  offset?: number[];
+}
+
+export const DoughnutChart = ({
+  labels,
+  data,
+  backgroundColor,
+  cutout,
+  legends = true,
+  offset,
+}: DoughChartProps) => {
+  const doughnutData: ChartData<"doughnut", number[], string> = {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor,
+        borderWidth: 0,
+        offset,
+      },
+    ],
+  };
+
+  const doughnutOption: ChartOptions<"doughnut"> = {
+    responsive: true,
+  };
+
+  return <Doughnut data={doughnutData} options={doughnutOption} />;
 };
