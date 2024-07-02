@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 import userImg from "../assets/dummy-user-img.png";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import rowData from "../assets/data.json";
-import { Barchart } from "../Components/Charts";
+import { Barchart, DoughnutChart } from "../Components/Charts";
 import { BiMaleFemale } from "react-icons/bi";
 
 const Dashboard = () => {
@@ -76,14 +76,17 @@ const Dashboard = () => {
         <section className=" transaction-container">
           <div className="gender-chart">
             <h2>Gender Ratio</h2>
+            <DoughnutChart
+              labels={["Male", "Female"]}
+              data={[95, 67]}
+              backgroundColor={["rgb(337, 100, 89)", "rgb(255, 200, 221)"]}
+            />
             <p>
               {" "}
               <BiMaleFemale />{" "}
             </p>
           </div>
-          <div>
-
-          </div>
+          <div></div>
         </section>
       </main>
     </div>
@@ -151,7 +154,5 @@ const CategoryItem = ({ heading, value, color }: categoryItemProps) => (
     <span>{value}%</span>
   </div>
 );
-
-
 
 export default Dashboard;

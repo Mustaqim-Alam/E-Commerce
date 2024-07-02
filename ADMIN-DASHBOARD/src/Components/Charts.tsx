@@ -8,6 +8,7 @@ import {
   Legend,
   ChartData,
   ChartOptions,
+  ArcElement,
 } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
 
@@ -17,7 +18,8 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement
 );
 
 const months = ["January", "February", "March", "April", "May", "June", "July"];
@@ -126,6 +128,16 @@ export const DoughnutChart = ({
 
   const doughnutOption: ChartOptions<"doughnut"> = {
     responsive: true,
+    plugins: {
+      legend: {
+        display: legends,
+        position: "bottom",
+        labels: {
+          padding: 40,
+        },
+      },
+    },
+    cutout,
   };
 
   return <Doughnut data={doughnutData} options={doughnutOption} />;
