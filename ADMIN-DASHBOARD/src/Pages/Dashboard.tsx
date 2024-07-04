@@ -80,6 +80,7 @@ const Dashboard = () => {
               labels={["Male", "Female"]}
               data={[95, 67]}
               backgroundColor={["rgb(337, 100, 89)", "rgb(255, 200, 221)"]}
+              cutout={90}
             />
             <p>
               {" "}
