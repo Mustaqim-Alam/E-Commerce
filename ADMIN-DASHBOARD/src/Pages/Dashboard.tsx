@@ -8,7 +8,6 @@ import { Barchart, DoughnutChart } from "../Components/Charts";
 import { BiMaleFemale } from "react-icons/bi";
 import DashboardTable from "../Components/DashboardTable";
 
-
 const Dashboard = () => {
   return (
     <div className="admin-container">
@@ -89,7 +88,7 @@ const Dashboard = () => {
               <BiMaleFemale />{" "}
             </p>
           </div>
-          <DashboardTable data={rowData.transaction}/>
+          <DashboardTable data={rowData.transaction} />
         </section>
       </main>
     </div>

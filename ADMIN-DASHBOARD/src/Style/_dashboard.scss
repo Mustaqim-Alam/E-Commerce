@@ -120,7 +120,7 @@
   }
   .transaction-container {
     display: flex;
-    gap: 2;
+    gap: 2rem;
     padding: 0 2rem 2rem 0;
     height: 30rem;
     > div {
@@ -132,6 +132,7 @@
       max-width: 20rem;
       padding: 1rem;
       position: relative;
+      border-radius: 10px;
       > h2 {
         text-align: center;
         margin: 1.5rem 0 2rem 0;
@@ -144,6 +145,17 @@
         left: 45%;
         font-size: 2rem;
         color: rgba(0, 0, 0, 0.637);
+      }
+    }
+    .transaction-box {
+      width: 100%;
+      overflow-y: auto;
+      padding: 1rem;
+      border-radius: 10px;
+      > h2 {
+        margin: 1.5rem 0 0 0;
+        @include heading;
+        text-align: center;
       }
     }
   }
