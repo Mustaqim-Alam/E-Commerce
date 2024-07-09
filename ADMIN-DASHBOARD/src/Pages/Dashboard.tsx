@@ -6,6 +6,8 @@ import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import rowData from "../assets/data.json";
 import { Barchart, DoughnutChart } from "../Components/Charts";
 import { BiMaleFemale } from "react-icons/bi";
+import DashboardTable from "../Components/DashboardTable";
+
 
 const Dashboard = () => {
   return (
@@ -87,7 +89,7 @@ const Dashboard = () => {
               <BiMaleFemale />{" "}
             </p>
           </div>
-          <div></div>
+          <DashboardTable data={rowData.transaction}/>
         </section>
       </main>
     </div>
