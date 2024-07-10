@@ -1,19 +1,47 @@
-import { useTable, Column, TableOptions } from "react-table";
+import {
+  AiOutlineSortAscending,
+  AiOutlineSortDescending,
+} from "react-icons/ai";
+
+import { GrFormNextLink, GrFormPreviousLink, GrLinkNext, GrLinkPrevious, GrPrevious } from "react-icons/gr";
+
+import {
+  useTable,
+  Column,
+  TableOptions,
+  useSortBy,
+  usePagination,
+} from "react-table";
 
 function TableHOC<T extends Object>(
   columns: Column<T>[],
   data: T[],
   containerClassname: string,
-  heading: string
+  heading: string,
+  showPagination: boolean = true
 ) {
   return function HOC() {
     const options: TableOptions<T> = {
       columns,
       data,
+      initialState: {
+        pageSize: 6,
+      },
     };
 
-    const { getTableProps, getTableBodyProps, rows, headerGroups, prepareRow } =
-      useTable(options);
+    const {
+      getTableProps,
+      getTableBodyProps,
+      page,
+      headerGroups,
+      prepareRow,
+      nextPage,
+      previousPage,
+      canNextPage,
+      canPreviousPage,
+      pageCount,
+      state: { pageIndex },
+    } = useTable(options, useSortBy, usePagination);
 
     return (
       <div className={containerClassname}>
@@ -23,13 +51,25 @@ function TableHOC<T extends Object>(
             {headerGroups.map((headerGroups) => (
               <tr {...headerGroups.getHeaderGroupProps()}>
                 {headerGroups.headers.map((column) => (
-                  <th {...column.getHeaderProps}>{column.render("Header")}</th>
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                    {column.isSorted && (
+                      <span>
+                        {" "}
+                        {column.isSortedDesc ? (
+                          <AiOutlineSortDescending />
+                        ) : (
+                          <AiOutlineSortAscending />
+                        )}
+                      </span>
+                    )}
+                  </th>
                 ))}
               </tr>
             ))}
           </thead>
           <tbody {...getTableBodyProps}>
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
@@ -41,6 +81,17 @@ function TableHOC<T extends Object>(
             })}
           </tbody>
         </table>
+        {showPagination && (
+          <div className="table-pagination">
+            <button disabled={!canPreviousPage} onClick={previousPage}>
+            <GrFormPreviousLink /> Prev
+            </button>
+            <span>{`${pageIndex + 1} of ${pageCount}`}</span>
+            <button disabled={!canNextPage} onClick={nextPage}>
+              Next <GrFormNextLink/>
+            </button>
+          </div>
+        )}
       </div>
     );
   };
