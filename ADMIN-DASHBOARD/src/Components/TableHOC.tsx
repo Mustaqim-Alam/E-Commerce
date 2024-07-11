@@ -84,11 +84,11 @@ function TableHOC<T extends Object>(
         {showPagination && (
           <div className="table-pagination">
             <button disabled={!canPreviousPage} onClick={previousPage}>
-            <GrFormPreviousLink /> Prev
+             ← Prev
             </button>
             <span>{`${pageIndex + 1} of ${pageCount}`}</span>
             <button disabled={!canNextPage} onClick={nextPage}>
-              Next <GrFormNextLink/>
+              Next →
             </button>
           </div>
         )}

@@ -39,6 +39,7 @@ const columns: Column<DataType>[] = [
     accessor: "action",
   },
 ];
+
 const img =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=804";
 
@@ -170,10 +171,10 @@ const Product = () => {
     <div className="admin-container">
       <Sidebar />
       <main className="main-container">{Table()}</main>
-      <Link to="admin/product/add" className="add-product-btn">
+      <Link to="admin/product/addNew" className="add-product-btn">
         <FaPlus />
       </Link>
-    </div>
+    </div> 
   );
 };
 
