@@ -3,7 +3,13 @@ import {
   AiOutlineSortDescending,
 } from "react-icons/ai";
 
-import { GrFormNextLink, GrFormPreviousLink, GrLinkNext, GrLinkPrevious, GrPrevious } from "react-icons/gr";
+import {
+  GrFormNextLink,
+  GrFormPreviousLink,
+  GrLinkNext,
+  GrLinkPrevious,
+  GrPrevious,
+} from "react-icons/gr";
 
 import {
   useTable,
@@ -81,17 +87,17 @@ function TableHOC<T extends Object>(
             })}
           </tbody>
         </table>
-        {showPagination && (
+        {pageCount > 1 ? (
           <div className="table-pagination">
             <button disabled={!canPreviousPage} onClick={previousPage}>
-             ← Prev
+              ← Prev
             </button>
             <span>{`${pageIndex + 1} of ${pageCount}`}</span>
             <button disabled={!canNextPage} onClick={nextPage}>
               Next →
             </button>
           </div>
-        )}
+        ) : null}
       </div>
     );
   };

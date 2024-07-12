@@ -7,6 +7,12 @@ const Customer = lazy(() => import("./Pages/Customer"));
 const Product = lazy(() => import("./Pages/Product"));
 const Transaction = lazy(() => import("./Pages/Transaction"));
 const AddNewProduct = lazy(() => import("./Pages/Management/AddNewProducts"));
+const ProductManagement = lazy(
+  () => import("./Pages/Management/ProductManagement")
+);
+const TransactionManagement = lazy(
+  () => import("./Pages/Management/TransactionManagement")
+);
 
 const App = () => {
   return (
@@ -24,7 +30,12 @@ const App = () => {
 
           {/* Manegment */}
 
-          <Route path="admin/product/addNew" element={<AddNewProduct />} />
+          <Route path="/admin/product/new" element={<AddNewProduct />} />
+          <Route path="/admin/product/:id" element={<ProductManagement />} />
+          <Route
+            path="/admin/transaction/:id"
+            element={<TransactionManagement />}
+          />
         </Routes>
       </Suspense>
     </Router>

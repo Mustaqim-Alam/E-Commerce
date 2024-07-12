@@ -171,7 +171,8 @@ const Product = () => {
     <div className="admin-container">
       <Sidebar />
       <main className="main-container">{Table()}</main>
-      <Link to="admin/product/addNew" className="add-product-btn">
+      
+      <Link to="/admin/product/new" className="create-product-btn">
         <FaPlus />
       </Link>
     </div> 
