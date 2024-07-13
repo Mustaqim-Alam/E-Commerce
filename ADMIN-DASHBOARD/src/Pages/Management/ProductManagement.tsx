@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Sidebar from "../../Components/Sidebar";
 
 const ProductManagement = () => {
@@ -23,12 +23,18 @@ const ProductManagement = () => {
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = () => {
-        if (typeof reader.result === "string") setPhoto(reader.result);
+        if (typeof reader.result === "string") setPhotoUpdate(reader.result);
       };
     }
   };
 
-  const submitHandler = () => {};
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setName(nameUpdate);
+    setPrice(priceUpdate);
+    setStock(stockUpdate);
+    setPhoto(photoUpdate);
+  };
 
   return (
     <div className="admin-container">
