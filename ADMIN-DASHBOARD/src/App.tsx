@@ -1,6 +1,9 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
+const BarChart = lazy(() => import("./Pages/Charts/BarChart"));
+const LineChart = lazy(() => import("./Pages/Charts/LineChart"));
+const PieChart = lazy(() => import("./Pages/Charts/PieChart"));
 
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
 const Customer = lazy(() => import("./Pages/Customer"));
@@ -36,6 +39,9 @@ const App = () => {
             path="/admin/transaction/:id"
             element={<TransactionManagement />}
           />
+          <Route path="/admin/chart/bar" element={<BarChart />} />
+          <Route path="/admin/chart/pie" element={<PieChart />} />
+          <Route path="/admin/chart/line" element={<LineChart />} />
         </Routes>
       </Suspense>
     </Router>
