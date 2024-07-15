@@ -1,7 +1,21 @@
-import React from "react";
+import { Loader } from "rsuite";
 
-const Loader = () => {
-  return <div>Loading...</div>;
+const LoaderComp = () => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "black",
+        color: "lavender",
+      }}
+    >
+      {<Loader />}
+    </div>
+  );
 };
 
-export default Loader;
+export default LoaderComp;
