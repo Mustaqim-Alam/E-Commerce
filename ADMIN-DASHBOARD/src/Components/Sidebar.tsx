@@ -42,8 +42,8 @@ const Sidebar = () => {
 			heading: "Apps",
 			item: [
 				{ url: "/admin/app/stopwatch", text: "Stopwatch", Icon: FaStopwatch },
-        { url: "/admin/chart/coupon", text: "Coupon", Icon: RiCoupon2Fill },
-        { url: "/admin/chart/toss", text: "Toss", Icon: FaGamepad },
+        { url: "/admin/app/coupon", text: "Coupon", Icon: RiCoupon2Fill },
+        { url: "/admin/app/toss", text: "Toss", Icon: FaGamepad },
 			]
 		}
 		

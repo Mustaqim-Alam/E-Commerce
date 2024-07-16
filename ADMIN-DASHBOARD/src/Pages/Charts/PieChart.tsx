@@ -18,8 +18,9 @@ const PieCharts = () => {
                 `rgb(206, 212, 218)`,
                 `rgb(193, 18, 31)`,
               ]}
-              legends={false}
+              
               offset={[0, 30, 50]}
+              
             />
           </div>
           <h2>Order Fullfillment Ratio</h2>
@@ -89,7 +90,6 @@ const PieCharts = () => {
                 `rgb(6, 252, 600)`,
                 `rgb(90, 0, 101)`,
               ]}
-              legends={false}
               offset={[10, 30, 50]}
             />
           </div>
