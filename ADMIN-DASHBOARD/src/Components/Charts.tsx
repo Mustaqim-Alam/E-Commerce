@@ -8,7 +8,10 @@ import {
   Legend,
   ChartData,
   ChartOptions,
+  PointElement,
   ArcElement,
+  LineElement,
+  Filler
 } from "chart.js";
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 
@@ -19,7 +22,10 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
+  PointElement,
+  LineElement,
+  Filler
 );
 
 const months = ["January", "February", "March", "April", "May", "June", "July"];
@@ -54,7 +60,6 @@ export const Barchart = ({
       },
       title: {
         display: false,
-        text: "Chart.js Bar Chart",
       },
     },
     scales: {
@@ -79,7 +84,7 @@ export const Barchart = ({
         label: title_1,
         data: data_1,
         backgroundColor: bgColor_1,
-        // barThickness: flex,
+        barThickness: "flex",
         barPercentage: 1,
         categoryPercentage: 0.4,
       },
@@ -87,7 +92,7 @@ export const Barchart = ({
         label: title_2,
         data: data_2,
         backgroundColor: bgColor_2,
-        // barThickness: flex,
+        barThickness: "flex",
         barPercentage: 1,
         categoryPercentage: 0.4,
       },
@@ -193,7 +198,9 @@ export const LineChart = ({
   borderColor,
   labels = months,
 }: LineChartProps) => {
-  const lineChartoptions: ChartOptions<"line"> = {
+
+  
+  const options: ChartOptions<"line"> = {
     responsive: true,
     plugins: {
       legend: {
@@ -201,9 +208,9 @@ export const LineChart = ({
       },
       title: {
         display: false,
-        text: "Chart.js Bar Chart",
       },
     },
+
     scales: {
       y: {
         beginAtZero: true,
@@ -219,10 +226,11 @@ export const LineChart = ({
     },
   };
 
-  const LineChartData: ChartData<"line", number[], string> = {
+  const lineChartData: ChartData<"line", number[], string> = {
     labels,
     datasets: [
       {
+        fill: true,
         label,
         data,
         backgroundColor,
@@ -231,5 +239,5 @@ export const LineChart = ({
     ],
   };
 
-  return <Line options={lineChartoptions} data={LineChartData} />;
+  return <Line options={options} data={lineChartData} />;
 };
