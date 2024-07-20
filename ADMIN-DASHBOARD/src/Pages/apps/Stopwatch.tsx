@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../Components/Sidebar";
 
 const formatTime = (timeInSecond: number) => {
-  const hours = Math.floor(timeInSecond / 3600);
-  const minute = Math.floor((timeInSecond % 3600) / 60);
-  const second = timeInSecond % 60;
-  const miliSecond = timeInSecond % 40;
+  const hours = Math.floor(timeInSecond / 36000);
+  const minute = Math.floor((timeInSecond % 36000) / 600);
+  const second = Math.floor((timeInSecond % 600) / 10);
 
   const hoursInString = hours.toString().padStart(2, "0");
   const minuteInString = minute.toString().padStart(2, "0");
   const secondInString = second.toString().padStart(2, "0");
-  const milisecondInString = miliSecond.toString().padStart(2, "0");
 
-  return `${hoursInString}: ${minuteInString}:${secondInString}:${milisecondInString}`;
+  return `${hoursInString}:${minuteInString}:${secondInString}`;
 };
 
 const Stopwatch = () => {
@@ -31,6 +29,11 @@ const Stopwatch = () => {
     };
   }, [isRunning]);
 
+  const handleReset = () => {
+    setTime(0);
+    setIsRunning(false);
+  };
+
   return (
     <div className="admin-container">
       <Sidebar />
@@ -39,8 +42,10 @@ const Stopwatch = () => {
         <section>
           <div className="stopwatch">
             <h2>{formatTime(time)}</h2>
-            <button onClick={() => setIsRunning((prev) => !prev)}>Start</button>
-            <button >Reset</button>
+            <button onClick={() => setIsRunning((prev) => !prev)}>
+              {isRunning ? "Stop" : "Start"}
+            </button>
+            <button onClick={handleReset}>Reset</button>
           </div>
         </section>
       </main>
