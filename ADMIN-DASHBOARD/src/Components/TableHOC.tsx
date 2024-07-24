@@ -3,20 +3,13 @@ import {
   AiOutlineSortDescending,
 } from "react-icons/ai";
 
-import {
-  GrFormNextLink,
-  GrFormPreviousLink,
-  GrLinkNext,
-  GrLinkPrevious,
-  GrPrevious,
-} from "react-icons/gr";
 
 import {
-  useTable,
   Column,
   TableOptions,
-  useSortBy,
   usePagination,
+  useSortBy,
+  useTable,
 } from "react-table";
 
 function TableHOC<T extends Object>(
@@ -24,7 +17,6 @@ function TableHOC<T extends Object>(
   data: T[],
   containerClassname: string,
   heading: string,
-  showPagination: boolean = true
 ) {
   return function HOC() {
     const options: TableOptions<T> = {
