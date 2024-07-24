@@ -1,5 +1,9 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Sidebar from "../../Components/Sidebar";
+
+const allLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const allNumber = "0123456789";
+const allSymbol = "!@#$%^&*()_+";
 
 const Coupon = () => {
   const [size, setSize] = useState<number>(8);
@@ -9,10 +13,40 @@ const Coupon = () => {
   const [isSymbollInclude, setIsSymbollInclude] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [coupon, setIsCoupon] = useState<string>("");
+  const [userError, setuserError] = useState<string>("");
 
-  const copyText = (coupon: string) => {};
+  let copyText = async (coupon: string) => {
+    await window.navigator.clipboard.writeText(coupon);
+    setIsCopied(true);
+  };
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {};
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isCharInclude && !isNumInclude && !isSymbollInclude) {
+      setuserError(
+        "Please include at least one option (Characters, Numbers, or Symbols)."
+      );
+      return;
+    }
+
+    let result: string = prefix || "";
+    let loopLength: number = size - result.length;
+
+    for (let index = 0; index < loopLength; index++) {
+      let entireString: string = "";
+      if (isCharInclude) entireString += allLetter;
+      if (isNumInclude) entireString += allNumber;
+      if (isSymbollInclude) entireString += allSymbol;
+
+      let randomNum: number = ~~(Math.random() * entireString.length);
+      result += entireString[randomNum];
+    }
+    setIsCoupon(result);
+    setuserError("");
+  };
+  useEffect(() => {
+    setIsCopied(false);
+  }, [coupon]);
 
   return (
     <div className="admin-container">
@@ -36,6 +70,7 @@ const Coupon = () => {
               minLength={8}
               placeholder="Code Size "
             />
+
             <fieldset>
               <legend>Include</legend>
               <input
@@ -58,9 +93,18 @@ const Coupon = () => {
               <span>Symboll</span>
             </fieldset>
             <button type="submit">Generate</button>
+            <p
+              style={{
+                fontSize: "1rem",
+                color: "red",
+                width: "100%",
+              }}
+            >
+              {userError}
+            </p>
           </form>
           {coupon && (
-            <code>
+            <code onClick={() => copyText(coupon)}>
               {coupon} <span>{isCopied ? "Copied" : "Copy"}</span>
             </code>
           )}

@@ -1,11 +1,34 @@
+import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { AiFillFileText } from "react-icons/ai";
-import { FaChartBar, FaChartLine, FaChartPie, FaGamepad,  FaStopwatch } from "react-icons/fa";
+import {
+  FaChartBar,
+  FaChartLine,
+  FaChartPie,
+  FaGamepad,
+  FaStopwatch,
+} from "react-icons/fa";
+import { HiMenuAlt2 } from "react-icons/hi";
 import { IoIosPeople } from "react-icons/io";
-import { RiCoupon2Fill, RiDashboardFill, RiShoppingBag3Fill } from "react-icons/ri";
+import {
+  RiCoupon2Fill,
+  RiDashboardFill,
+  RiShoppingBag3Fill,
+} from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [phoneActive, setPhoneActive] = useState<boolean>(
+    window.innerWidth < 1100
+  );
+
+  useEffect(() => {
+    const handleResize = () => setPhoneActive(window.innerWidth < 1100);
+    window.addEventListener("resize", handleResize);
+    return () => window.addEventListener("resize", handleResize);
+  }, [phoneActive]);
+
   interface ListItem {
     url: string;
     text: string;
@@ -30,78 +53,70 @@ const Sidebar = () => {
         },
       ],
     },
-		{
-			heading: "Charts",
-			item: [
-				{ url: "/admin/chart/bar", text: "Bar", Icon: FaChartBar },
+    {
+      heading: "Charts",
+      item: [
+        { url: "/admin/chart/bar", text: "Bar", Icon: FaChartBar },
         { url: "/admin/chart/pie", text: "Pie", Icon: FaChartPie },
         { url: "/admin/chart/line", text: "Line", Icon: FaChartLine },
-			]
-		},
-		{
-			heading: "Apps",
-			item: [
-				{ url: "/admin/app/stopwatch", text: "Stopwatch", Icon: FaStopwatch },
+      ],
+    },
+    {
+      heading: "Apps",
+      item: [
+        { url: "/admin/app/stopwatch", text: "Stopwatch", Icon: FaStopwatch },
         { url: "/admin/app/coupon", text: "Coupon", Icon: RiCoupon2Fill },
         { url: "/admin/app/toss", text: "Toss", Icon: FaGamepad },
-			]
-		}
-		
+      ],
+    },
   ];
 
   return (
-    <aside>
-      <h2>Shopping KarT.</h2>
-      {sideBarData.map((section, index) => (
-        <div key={index}>
-          <h5>{section.heading}</h5>
-          <ul>
-            {section.item.map((item, index) => (
-              <Li
-                key={index}
-                url={item.url}
-                text={item.text}
-                Icon={item.Icon}
-                location={location}
-              />
-            ))}
-          </ul>
-        </div>
-      ))}
-    </aside>
-
-    // <aside>
-    //   <h2>Shopping KarT.</h2>
-    //   <div>
-    //     <h5>Dashboard</h5>
-    //     <ul>
-    //       <Li
-    //         url="/admin/dashboard"
-    //         text="Dashboard"
-    //         location={location}
-    //         Icon={RiDashboardFill}
-    //       />
-    //       <Li
-    //         url="/admin/product"
-    //         text="Product"
-    //         location={location}
-    //         Icon={RiShoppingBag3Fill}
-    //       />
-    //       <Li
-    //         url="/admin/customer"
-    //         text="Customer"
-    //         location={location}
-    //         Icon={IoIosPeople}
-    //       />
-    //       <Li
-    //         url="/admin/transaction"
-    //         text="Transaction"
-    //         location={location}
-    //         Icon={AiFillFileText}
-    //       />
-    //     </ul>
-    //   </div>
-    // </aside>
+    <>
+      {phoneActive && (
+        <button id="hamburger" onClick={() => setShowModal(true)}>
+          {" "}
+          <HiMenuAlt2 />{" "}
+        </button>
+      )}
+      <aside
+        style={
+          phoneActive
+            ? {
+                width: "20rem",
+                height: "100vh",
+                position: "fixed",
+                top: "0",
+                left: showModal ? "0" : "-20rem",
+                transition: "all 0.5s",
+              }
+            : {}
+        }
+      >
+        <h2>Shopping KarT.</h2>
+        {sideBarData.map((section, index) => (
+          <div key={index}>
+            <h5>{section.heading}</h5>
+            <ul>
+              {section.item.map((item, index) => (
+                <Li
+                  key={index}
+                  url={item.url}
+                  text={item.text}
+                  Icon={item.Icon}
+                  location={location}
+                />
+              ))}
+            </ul>
+          </div>
+        ))}
+        {phoneActive && (
+          <button id="close-sidebar" onClick={() => setShowModal(false)}>
+            Close
+          </button>
+        )}
+      </aside>
+    </>
   );
 };
 

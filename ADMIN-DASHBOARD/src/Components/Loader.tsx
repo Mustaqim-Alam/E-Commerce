@@ -1,21 +1,12 @@
-import { Loader } from "rsuite";
+import { BounceLoader } from "react-spinners";
 
-const LoaderComp = () => {
+function LoaderComp() {
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "black",
-        color: "lavender",
-      }}
-    >
-      {<Loader />}
-    </div>
+    <section className="loader">
+      <div className="sweet-loading">
+        <BounceLoader color="blue" />
+      </div>
+    </section>
   );
-};
-
+}
 export default LoaderComp;
