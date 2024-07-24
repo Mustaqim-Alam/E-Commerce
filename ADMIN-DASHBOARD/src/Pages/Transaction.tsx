@@ -80,7 +80,6 @@ const Transaction = () => {
       data,
       "dashboard-product-box",
       "Transaction",
-      true
     ),
     []
   );

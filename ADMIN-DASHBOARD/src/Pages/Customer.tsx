@@ -101,7 +101,6 @@ const Customer = () => {
       data,
       "dashboard-product-box",
       "Customer",
-      true
     ),
     []
   );
