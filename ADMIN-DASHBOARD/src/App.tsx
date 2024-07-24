@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import LoaderComp from "./Components/Loader";
 const BarChart = lazy(() => import("./Pages/Charts/BarChart"));
 const LineCharts = lazy(() => import("./Pages/Charts/LineChart"));
@@ -27,6 +27,14 @@ const App = () => {
     <Router>
       <Suspense fallback={<LoaderComp />}>
         <Routes>
+          <Route
+            path="/"
+            element={
+              <Link to="/admin/dashboard">
+                <button>Visit to Admin Dashboarrd</button>
+              </Link>
+            }
+          />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/customer" element={<Customer />} />
           <Route path="/admin/product" element={<Product />} />
