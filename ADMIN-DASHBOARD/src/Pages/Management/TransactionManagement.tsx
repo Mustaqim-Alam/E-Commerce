@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar";
 import { orderItemType, orderType } from "../../Types";
-import { Link } from "react-router-dom";
 
 const img =
   "https://images.unsplash.com/photo-1622428051717-dcd8412959de?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -47,7 +47,6 @@ const TransactionManagement = () => {
     shippingCharge,
     tax,
     total,
-    _id,
   } = order;
 
   const updateHandler = ()=>{

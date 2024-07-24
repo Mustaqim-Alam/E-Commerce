@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Sidebar from "../../Components/Sidebar";
-import { log10 } from "chart.js/helpers";
 
 const Toss = () => {
   const [angle, setAngle] = useState<number>(0);
